@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue instance 뷰 인스턴스</title>
+</head>
+<body>
+    <div id="app">
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        // const vm = new Vue();
+
+        // vue 인스턴스를 생성하는 생성자 함수
+        // 생성자 함수의 인수로는 객체가 들어간다
+        // 옵션이 들어있는 객체를 변수로 따로 빼서 인수로 전달해도 되지만 공식문서대로 우리도 가독성 좋게 객체 리터럴로 넣자.
+        const vm = new Vue({
+            // el: 인스턴스가 그려지는 화면의 시작점 (특정 HTML 태그)
+            el: '#app',
+
+            // template: 화면에 표시할 요소 (HTML, CSS 등)
+            template: '',
+
+            // data: 뷰의 반응성(Reactivity)이 반영된 데이터 속성
+            data: {
+                message: 'hi'
+            },
+
+            // methods: 화면의 동작과 이벤트 로직을 제어하는 메서드
+            methods: {
+
+            },
+
+            // created: 뷰의 라이프 사이클과 관련된 속성
+            created: function () {
+
+            },
+
+            // watch: data에서 정의한 속성이 변화했을 때 추가 동작을 수행할 수 있게 정의하는 속성
+            watch: {
+
+            },
+        });
+        console.log(vm);
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue component</title>
+</head>
+<body>
+    <!-- 상위 컴포넌트-->
+    <div id="app">
+        <!-- 등록한 컴포넌트를 화면에 표시하려면 컴포넌트 이름의 태그를 추가한다-->
+        <!-- 하위 컴포넌트-->
+        <app-header></app-header>
+        <app-content></app-content>
+        <app-footer></app-footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        // 전역 컴포넌트 등록 (플러그인이나 라이브러리 등 전역으로 공통으로 사용할 컴포넌트만 이 방법으로 등록함)
+        // Vue.component('컴포넌트 이름', { 컴포넌트 내용 });
+        Vue.component('app-header', {
+            template: '<h1>header</h1>',
+        });
+        Vue.component('app-content', {
+            template: '<div>content</div>'
+        });
+
+        new Vue({
+            el: '#app', // 뷰 인스턴스를 생성하면 브라우저의 Vue 개발자 도구에서 #app을 Root 컴포넌트로 인식한다.
+            // 지역 컴포넌트 등록 (일반적으로 지역 컴포넌트를 많이 사용)
+            components: {
+                // '컴포넌트 이름': 컴포넌트 내용
+                'app-footer': {
+                    template: '<footer>footer</footer>'
+                },
+            },
+        });
+    </script>
+</body>
+</html>

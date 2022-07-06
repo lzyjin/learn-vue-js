@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue의 특징 reactivity</title>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script>
+        const div = document.querySelector('#app');
+        const viewModel = {};
+        // Object.defineProperty(obj, prop, descriptor);
+        // Object.defineProperty(속성을 정의할 객체, 새로 정의하거나 수정하려는 속성의 이름, 새로 정의하거나 수정하려는 속성을 기술하는 객체);
+        Object.defineProperty(viewModel, 'str', {
+            // 속성에 접근했을 때의 동작을 정의
+            get: function () {
+                console.log('접근');
+            },
+            // 속성에 값을 할당했을 때의 동작을 정의
+            set: function (newValue) {
+                console.log('할당', newValue);
+                div.innerHTML = newValue; // 값을 바꿀때마다 화면이 바뀐다.
+                // vue의 핵심. reactivity(반응성)
+                // 데이터의 변화를 라이브러리에서 감지해 알아서 화면을 그려줌
+            },
+        });
+
+        div.innerHTML = 'hello world';
+    </script>
+</body>
+</html>

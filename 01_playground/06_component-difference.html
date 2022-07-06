@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>지역 컴포넌트와 전역 컴포넌트의 차이</title>
+</head>
+<body>
+    <!-- 상위 컴포넌트-->
+    <div id="app">
+        <!-- 등록한 컴포넌트를 화면에 표시하려면 컴포넌트 이름의 태그를 추가한다-->
+        <!-- 하위 컴포넌트-->
+        <app-header></app-header>
+        <app-footer></app-footer>
+    </div>
+
+    <div id="app2">
+        <app-header></app-header>
+        <app-footer></app-footer>
+        <!-- 뷰 인스턴스 등록옵션에서 지역 컴포넌트인 app-footer를 등록하지 않으면 에러 발생-->
+        <!-- [Vue warn]: Unknown custom element: <app-footer> - did you register the component correctly? For recursive components, make sure to provide the "name" option. -->
+    </div>
+
+    <!-- Vue 개발자도구를 확인해보면 Root 컴포넌트가 두개 생긴 것을 볼 수 있다.-->
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        // 전역 컴포넌트 등록 (플러그인이나 라이브러리 등 전역으로 공통으로 사용할 컴포넌트만 이 방법으로 등록함)
+        // 모든 인스턴스에 등록된다. -> 인스턴스를 생성할 때마다 새로 등록할 필요가 없다.
+        // Vue.component('컴포넌트 이름', { 컴포넌트 내용 });
+        Vue.component('app-header', {
+            template: '<h1>header</h1>',
+        });
+
+        new Vue({
+            el: '#app', // 뷰 인스턴스를 생성하면 브라우저의 Vue 개발자 도구에서 #app을 Root 컴포넌트로 인식한다.
+            // 지역 컴포넌트 등록 (일반적으로 지역 컴포넌트를 많이 사용)
+            components: {
+                // '컴포넌트 이름': 컴포넌트 내용
+                'app-footer': {
+                    template: '<footer>footer</footer>'
+                },
+            },
+        });
+
+        // 뷰 인스턴스는 여러 개 생성할 수 있다.
+        // 지역 컴포넌트는 뷰 인스턴스를 생성할 때마다 새로 등록해야만 한다.
+        new Vue({
+            el: '#app2',
+            components: {
+                'app-footer': {
+                    template: '<footer>footer</footer>',
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>일반적인 웹 개발 방식</title>
+</head>
+<body>
+    <div id="app">
+
+    </div>
+
+    <script>
+        // 자바스크립트는 해당 html 태그의 내용을 조작하는 역할
+        const div = document.querySelector('#app');
+        let str = 'hello world';
+        div.innerHTML = str;
+
+        // 만약 str 값이 바뀌면
+        str = 'hello world!!!';
+        // 화면에 출력하는 코드가 다시 필요함
+        div.innerHTML = str;
+    </script>
+</body>
+</html>
