@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Component Communication - event emit</title>
+</head>
+<body>
+    <!-- 상위 컴포넌트의 템플릿 -->
+    <!-- 이벤트 발생은 컴포넌트 통신 방법 중 하위 컴포넌트에서 상위 컴포넌트로 통신하는 방식이다 -->
+
+    <div id="app">
+        <!-- 해당 이벤트를 수신하기 위해 상위 컴포넌트의 템플릿에 아래와 같이 구현한다 -->
+        <!-- <app-header v-on:하위 컴포넌트에서 발생한 이벤트 이름="상위 컴포넌트의 실행할 메서드 이름"></app-header> -->
+        <app-header v-on:pass="logText"></app-header>
+
+        <!-- 위 코드는 하위 컴포넌트인 appHeader에서 passEvent() 메서드가 실행되면 pass라는 이벤트가 발생하고,
+        이를 상위 컴포넌트인 루트 컴포넌트의 v-on 디렉티브로 이벤트를 받아 logText()라는 메서드를 실행하는 코드이다. -->
+
+        <app-content v-on:add="increaseNum"></app-content>
+        <p>{{ num }}</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        const appHeader = {
+            template: '<button v-on:click="passEvent">click me</button>',
+            methods: {
+                passEvent: function () {
+                    // 이벤트 발생
+                    // this.$emit('이벤트 이름');
+                    this.$emit('pass');
+                }
+            },
+        };
+        const appContent = {
+            template: '<button v-on:click="addNumber">add</button>',
+            methods: {
+                addNumber: function () {
+                    this.$emit('add');
+                }
+            }
+        };
+
+        // new Vue({
+        const vm = new Vue({
+            el: '#app',
+
+            // 로컬 컴포넌트 등록
+            components: {
+                'app-header': appHeader,
+                'app-content': appContent,
+            },
+
+            data: {
+                num:  10,
+            },
+
+            methods: {
+                logText: function () {
+                    console.log('event received');
+                },
+                increaseNum: function () {
+                    // this는 new Vue()로 생성한 뷰 인스턴스를 가리킴
+                    // javascript 메서드로 호출했을때의 this와 동일
+                    // 뷰 인스턴스를 vm이라는 변수에 담았을 때 this.num은 vm.num이 됌
+                    this.num++;
+                    console.log('increase');
+                }
+            },
+        });
+        console.log(vm);
+    </script>
+</body>
+</html>

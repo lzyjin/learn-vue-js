@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Component Communication - props</title>
+</head>
+<body>
+    <!-- 상위 컴포넌트의 템플릿 -->
+    <div id="app">
+        <!-- 상위 컴포넌트에서 하위 컴포넌트로 데이터를 내려줌: props 속성으로 데이터를 전달 -->
+        <!-- <app-header v-bind:프롭스 속성 이름="상위 컴포넌트의 데이터 이름"></app-header> -->
+        <app-header v-bind:propsdata="message"></app-header>
+        <app-content v-bind:propsdata="num"></app-content>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        // 하위 컴포넌트의 내용
+        const appHeader = {
+            template: '<h1>{{ propsdata }}</h1>',
+            props: ['propsdata'],
+        };
+        const appContent = {
+            template: '<div>{{ propsdata }}</div>',
+            props: ['propsdata'],
+        };
+
+        // vue 인스턴스 생성
+        new Vue({
+            el: '#app',
+            components: {
+                'app-header': appHeader,
+                'app-content': appContent,
+            },
+            data: {
+                message: 'hi~~~',
+                num: 10,
+            }
+        });
+    </script>
+</body>
+</html>
