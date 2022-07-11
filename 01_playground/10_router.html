@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>10 - 뷰 라우터</title>
+</head>
+<body>
+    <!-- 뷰 라우터는 뷰 라이브러리를 이용하여 싱글 페이지 어플리케이션을 구현할 때 사용하는 라이브러리이다. -->
+    <div id="app">
+        <!-- 일반적으로 웹 페이지에서 페이지 이동을 할 때는 사용자가 url을 다 쳐서 이동하지 않습니다.
+        이 때 화면에서 특정 링크를 클릭해서 페이지를 이동할 수 있게 해줘야 하는데 그게 바로 <router-link> 입니다. -->
+        <!-- <router-link to="페이지를 이동할 url"></router-link> -->
+        <router-link to="/login">Login</router-link>
+        <router-link to="/main">Main</router-link>
+        <!-- <router-link></router-link>태그는 <a></a>태그로 변환되어 나타난다-->
+
+        <!-- 페이지 url이 변경되었을 때 url에 따라 컴포넌트가 뿌려질 영역-->
+        <!-- 뷰 인스턴스에 뷰 라우터를 연결해야만 사용할 수 있는 뷰 라우터의 태그-->
+        <!-- 브라우저의 주소 창에서 url이 변경되면, 앞에서 정의한 routes 속성에 따라 해당 컴포넌트가 화면에 뿌려집니다. 이 때 뿌려지는 지점이 템플릿의 <router-view>입니다. -->
+        <router-view></router-view> <!-- LoginComponent 또는 MainComponent -->
+
+        <!-- 주소창 맨 뒤에 /login이라고 치면 위의 <router-view></router-view>가 <div>login</div>로 바뀐다 -->
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <!-- 2022년 2월 7일부터 Vue.js 라이브러리와 Vue Router 라이브러리의 CDN 주소는 Vue 3 기반의 라이브러리 코드를 들고 옵니다. 따라서, Vue 2로 학습하고 개발하시는 분들은 위와 같이 3.5.3 버전을 사용해 주세요-->
+    <script src="https://unpkg.com/vue-router@3.5.3/dist/vue-router.js"></script>
+    <script>
+        const LoginComponent = {
+            template: '<div>login</div>',
+        };
+        const MainComponent = {
+            template: '<div>main</div>',
+        };
+
+        // 뷰 라우터 등록
+        // 뷰 라우터 인스턴스 생성
+        const router = new VueRouter({
+            // 라우터 옵션
+
+            // url의 해쉬값(#) 제거 속성
+            mode: 'history',
+
+            // 페이지의 라우팅 정보가 배열로 담김
+            // 라우팅 할 url과 컴포넌트 값 지정
+            routes: [
+                // 로그인 페이지 정보
+                {
+                    // 페이지의 url
+                    path: '/login',
+                    // 해당 url에서 표시될 컴포넌트
+                    component: LoginComponent, // key이름이 components가 아니라 component임. 해당 페이지에 뿌려질 컴포넌트는 딱 하나라서
+                },
+
+                // 메인 페이지 정보
+                {
+                    path: '/main',
+                    component: MainComponent,
+                },
+            ],
+        });
+
+        new Vue({
+            el: '#app',
+
+            // 이 코드를 주석하고 vue 개발자도구에서 확인하면 RouterView가 없어진다
+            router: router, // 뷰 인스턴스에 뷰 라우터를 등록
+
+            // 여기는 component가 아니라 components
+            components: {
+
+            },
+        });
+    </script>
+</body>
+</html>

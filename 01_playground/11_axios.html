@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>11 - axios</title>
+</head>
+<body>
+    <!-- axios는 뷰에서 권고하는 HTTP 통신 라이브러리이다 -->
+    <div id="app">
+        <button v-on:click="getData">get user</button>
+        <div>{{ users }}</div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                users: [],
+            },
+            methods: {
+                getData: function () {
+                    const vm = this;
+                    // 엑시오스 라이브러리를 설치하면 axios라는 변수에 접근할 수 있게 된다.
+                    // axios 변수를 사용해서 다음과 같이 HTTP GET 요청을 날리는 코드를 작성한다.
+                    axios.get('https://jsonplaceholder.typicode.com/users/')
+                        // 비동기 통신이 성공했을 경우 .then()은 콜백을 인자로 받아 결과값을 처리한다
+                        .then(function (response) {
+                            // console.log(response);
+                            console.log(response.data);
+                            // this.users = response.data; // 여기서의 this는 뷰 인스턴스를 가리키는게 아님
+                            console.log(this); // Window
+                            vm.users = response.data;
+                        })
+                        // .catch를 통해 오류를 처리한다.
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                },
+            }
+        });
+    </script>
+
+</body>
+</html>
