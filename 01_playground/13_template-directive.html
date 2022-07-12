@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>template - 디렉티브</title>
+    <style>
+        .text-blue {
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- <p id="abc1234">{{ num }}</p>-->
+        <p v-bind:id="uuid">{{ num }}</p>
+
+        <!-- <p class="text-blue">{{ doubleNum }}</p> -->
+        <p v-bind:class="name">{{ doubleNum }}</p>
+
+        <!-- v-if는 조건이 false일 때 태그를 제거 -->
+        <div v-if="loading">
+            Loading...
+        </div>
+        <div v-else>
+            test user has been logged in
+        </div>
+
+        <!-- v-show는 조건이 false일 때 css display: none 처리해서 안보이게 함 -->
+        <div v-show="loading">
+            Loading...
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                num: 10,
+                uuid: 'abc1234',
+                name: 'text-blue',
+                loading: true,
+            },
+            computed: {
+                doubleNum: function () {
+                    return this.num * 2;
+                },
+            }
+        });
+    </script>
+</body>
+</html>

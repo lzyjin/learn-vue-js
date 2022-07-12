@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>methods, event</title>
+
+</head>
+<body>
+    <div id="app">
+        <!-- <button v-on:이벤트="실행할 메서드 이름">click me</button> -->
+        <!-- <button v-on:이벤트:이벤트모디파이어="실행할 메서드 이름">click me</button> -->
+        <button v-on:click="logText">click me</button>
+
+        <form action="">
+            <input type="text" v-on:keyup="logText">
+            <input type="text" v-on:keyup.enter="logText"> <!-- enter키가 keyup되었을 때만 logText를 실행 -->
+            <button type="button">add</button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+            },
+            methods: {
+                logText: function () {
+                    console.log('clicked');
+                },
+            },
+        });
+    </script>
+</body>
+</html>
