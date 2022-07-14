@@ -13,8 +13,16 @@
 </head>
 <body>
     <div id="app">
-        <!-- <p v-bind:class="{ warning: isError }">Hello</p> -->
-        <p v-bind:class="errorTextColor">Hello</p>
+        <!-- <div v-bind:class="{ 클래스명: 불리언값을 갖는 data, 클래스명: 불리언 값을 갖는 data, ... }"></div> -->
+        <!-- warning 클래스의 존재 여부가 데이터 속성 isError 의 참 속성에 의해 결정된다 -->
+        <!-- 객체에 필드가 더 있으면 여러 클래스를 토글 할 수 있습니다 -->
+
+        <!-- <div v-bind:class="[activeClass, errorClass]"></div> 이렇게 v-bind:class 속성에 배열을 전달할 수도 있다 -->
+
+        <!-- <p v-bind:class="{ warning: isError }">Hello</p>-->
+        <!-- https://vuejs.org/guide/essentials/class-and-style.html -->
+
+         <p v-bind:class="errorTextColor">Hello</p>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
